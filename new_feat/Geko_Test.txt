@@ -1,0 +1,98 @@
+Attribute VB_Name = "Geko_Test"
+Private pd As New Geko
+
+Sub Test_CUD()
+    Dim strCnn As String
+    Dim sql As String
+    
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\backend.accdb"
+
+'    -----SQL=NUEVO REGISTRO
+    
+    sql = "INSERT INTO test "
+    sql = sql + "VALUES('116','Javacript','NodeJs')"
+
+
+    '-----SQL=ACTUALIZAR
+    
+'    sql = "UPDATE tb_maquila "
+'    sql = sql + "SET cliente='PANINI',maquilas='2000089' "
+'    sql = sql + "WHERE CODIGO_ACTUAL = '1000020300'"
+
+
+
+   '-----SQL=ELIMINAR REGISTRO
+'
+'    sql = "DELETE * FROM tb_maquila "
+'    sql = sql + "WHERE CODIGO_ACTUAL = '1000020300'"
+       
+    pd.strConnection = strCnn
+    pd.executeCommand (sql)
+
+
+End Sub
+Sub Test_Mostrar_Recordset()
+    Dim strCnn As String
+    Dim sql As String
+    
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\backend.accdb"
+    
+    sql = "SELECT * FROM test"
+    
+    pd.strConnection = strCnn
+    
+    Debug.Print pd.showString(sql)
+            
+End Sub
+Sub Cuenta_registro()
+
+    sql = "select * from tb_maquila"
+    
+    pd.strConnection = strCnn
+    Debug.Print pd.getRecordset(sql)
+    
+End Sub
+Sub Existe_registro()
+
+    sql = "select * from tb_maquila where codigo_actual = '1000003903'"
+    
+    pd.strConnection = strCnn
+    Debug.Print pd.ExitsRecord(sql)
+    
+End Sub
+Sub Descargar_datos()
+
+    sql = "select * from tb_maquila"
+    pd.strConnection = strCnn
+    pd.downloadData sql, "Mauilas"
+    
+End Sub
+
+Sub Cargar_ctrlListBox()
+    frm_Test_geko.Show
+End Sub
+
+
+Sub Test_Mostrar_Recorset2()
+
+    sql = "SELECT * FROM TB_MAQUILA where codigo_actual = '51'"
+
+    pd.strConnection = strCnn
+    pd.showRecordset (sql)
+    
+    With pd.rs
+        If .BOF And .EOF Then
+            MsgBox "No se encontaron registros", vbInformation
+        Else
+            .MoveFirst
+            Do While Not (.EOF)
+                Debug.Print .Fields(0) & "/" & .Fields(1) & "/" & .Fields(2)
+                .MoveNext
+            Loop
+        End If
+    End With
+
+
+    pd.freeMemory
+    
+End Sub
