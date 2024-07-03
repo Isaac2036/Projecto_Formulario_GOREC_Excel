@@ -1,0 +1,7 @@
+﻿Private Sub btn_insertar_Click()
+    UserForm1.Show
+End Sub
+
+Private Sub btn_buscar_Click()
+    UserForm2.Show
+End Sub
