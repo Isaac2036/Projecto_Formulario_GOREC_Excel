@@ -1,4 +1,5 @@
 Attribute VB_Name = "storage"
+
 Sub test_()
     Dim gk As New Geko
     Dim sql As String
@@ -30,7 +31,6 @@ Cath:
     Debug.Print Err.Number
 End Sub
 
-
 Sub test_read()
     
     Dim pd As New Geko
@@ -38,8 +38,9 @@ Sub test_read()
     Dim strCnn As String
     Dim rs As ADODB.Recordset
     
-    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\database1.accdb"
-    sql = "select * from tabla1"
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
+    sql = "select * from reversion"
+'    sql = "select max(id) from reversion"
     
     pd.strConnection = strCnn
     pd.showRecordset (sql)
@@ -48,13 +49,22 @@ Sub test_read()
         If .BOF And .EOF Then
             MsgBox "No se encontaron registros", vbInformation
         Else
-            .MoveFirst
-            Do While Not (.EOF)
-                Debug.Print .Fields(0)
-                Debug.Print .Fields(1)
-                Debug.Print .Fields(2)
-                .MoveNext
-            Loop
+        Dim head As String
+'            .MoveFirst
+'            Do While Not (.EOF)
+'                Debug.Print .Fields(0)
+'                Debug.Print .Fields(1)
+'                Debug.Print .Fields(2)
+'                .MoveNext
+'            Loop
+            For i = 0 To .Fields.count - 1
+'                head = head & "," & .Fields(i).Name
+                Debug.Print "valor: "; .Fields(i)
+                Debug.Print "Nombre de campo: "; .Fields(i).Name
+                Debug.Print "Tipo de campo: "; .Fields(i).Type
+                Debug.Print "=======" & vbCrLf
+            Next i
+'            Debug.Print head
         End If
     End With
     
@@ -72,5 +82,25 @@ Sub test_update()
     gk.strConnection = strCnn
     gk.executeCommand (sql)
 End Sub
+Function getLastRecord() As Integer
+    
+    Dim cnn As ADODB.Connection
+    Dim rs As ADODB.Recordset
+    Dim strCnn As String
 
+'    On Error GoTo Catch
+
+    ' Configurar la conexión
+    Set cnn = New ADODB.Connection
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
+    cnn.Open strCnn
+    Set rs = cnn.Execute("select * from reversion")
+    
+    If rs.EOF And rs.BOF Then
+        getLastRecord = rs.Fields(0)
+    Else
+        getLastRecord = 0
+    End If
+    
+End Function
 

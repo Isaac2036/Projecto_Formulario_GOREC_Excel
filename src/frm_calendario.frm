@@ -31,10 +31,6 @@ Private Sub Frame1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, By
     Call Recorrer_Restaurar_Etiquetas_Fechas
 End Sub
 
-Private Sub Label50_Click()
-
-End Sub
-
 Private Sub Label8_Click()
     If Label8 <> "" Then
         SeleccDia = Label8.Caption
