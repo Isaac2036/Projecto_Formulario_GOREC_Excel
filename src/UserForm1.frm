@@ -90,14 +90,14 @@ Private Sub showDataInList()
     
     gk.freeMemory
 End Sub
-Private Function insertData(etapa As String, serie As String, uso As String, estado As String, proyecto As String, nro_partida As String, resolución As String, expediente As String, anio As Integer, administrados As String, dni As String, zona As String, sector As String, barrio As String, grupo_residencial As Integer, manzana As String, lote As Integer, ultimo_documento As String, nro_folio As Integer, paquete As String, ubicacion_expediente As String, observacion As String, profesional As String, fecha_actualizacion As Date, rubro As String, area As String, contacto As String, metros As String) As Boolean
+Private Function insertData(etapa As String, serie As String, uso As String, estado As String, proyecto As String, nro_partida As String, resolución As String, Expediente As String, anio As Integer, administrados As String, dni As String, zona As String, sector As String, barrio As String, grupo_residencial As Integer, manzana As String, lote As Integer, ultimo_documento As String, nro_folio As Integer, paquete As String, ubicacion_expediente As String, observacion As String, profesional As String, fecha_actualizacion As Date, rubro As String, area As String, contacto As String, metros As String) As Boolean
     Dim gk As New Geko
     Dim strCnnn As String
     Dim sql As String
     
     On Error GoTo Cath
     strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
-    sql = "insert into Reversion values (" & etapa & ",'" & serie & "', '" & uso & "','" & estado & "','" & proyecto & "','" & nro_partida & "','" & resolucion & "','" & expediente & "','" & anio & "','" & administrados & "','" & dni & "','" & zona & "','" & sector & "','" & barrio & "','" & grupo_residencial & "','" & manzana & "','" & lote & "','" & ultimo_documento & "','" & nro_folio & "','" & paquete & "','" & ubicacion_expediente & "','" & observacion & "','" & profesional & "','" & fecha_actualizacion & "','" & rubro & "','" & area & "','" & contacto & "','" & metro & "')"
+    sql = "insert into Reversion values (" & etapa & ",'" & serie & "', '" & uso & "','" & estado & "','" & proyecto & "','" & nro_partida & "','" & resolucion & "','" & Expediente & "','" & anio & "','" & administrados & "','" & dni & "','" & zona & "','" & sector & "','" & barrio & "','" & grupo_residencial & "','" & manzana & "','" & lote & "','" & ultimo_documento & "','" & nro_folio & "','" & paquete & "','" & ubicacion_expediente & "','" & observacion & "','" & profesional & "','" & fecha_actualizacion & "','" & rubro & "','" & area & "','" & contacto & "','" & metro & "')"
     
     gk.strConnection = strCnn
     gk.executeCommand (sql)

@@ -141,26 +141,26 @@ Sub Fecha_Seleccionada()
 '    MsgBox SeleccionFecha
     ctrlFecha = SeleccionFecha
 End Sub
-Sub Ocultar_Ayuda()
-      
-      With UserForm2
-      
-            .Label252.ForeColor = RGB(14, 154, 260)
-            .Label252.Font.Underline = True
-            .Label252.ControlTipText = "Crear nuevo usuario"
-            .MultiPage13.Style = fmTabStyleNone
-            .MultiPage13.Visible = False
-      
-            For i = 254 To 258 Step 2
-                  .Controls("Label" & i).ForeColor = RGB(14, 154, 260)
-            Next i
-            
-             For i = 253 To 257 Step 2
-                  .Controls("Label" & i).ForeColor = RGB(32, 32, 228)
-            Next i
-            
-      End With
-End Sub
+'Sub Ocultar_Ayuda()
+'
+'      With UserForm2
+'
+'            .Label252.ForeColor = RGB(14, 154, 260)
+'            .Label252.Font.Underline = True
+'            .Label252.ControlTipText = "Crear nuevo usuario"
+'            .MultiPage13.Style = fmTabStyleNone
+'            .MultiPage13.Visible = False
+'
+'            For i = 254 To 258 Step 2
+'                  .Controls("Label" & i).ForeColor = RGB(14, 154, 260)
+'            Next i
+'
+'             For i = 253 To 257 Step 2
+'                  .Controls("Label" & i).ForeColor = RGB(32, 32, 228)
+'            Next i
+'
+'      End With
+'End Sub
 Function Meses(ByVal nMes As Byte) As String
     Dim nomMes(0 To 11) As String
     

@@ -539,7 +539,7 @@ Private Sub UserForm_Initialize()
     Me.StartUpPosition = 0
     
     Me.Top = poscArriba
-    Me.Left = poscIzquierda
+    Me.left = poscIzquierda
 '    Me.Left = poscIzquierda
     
     Call Limpiar_Etiquetas_Frame1
