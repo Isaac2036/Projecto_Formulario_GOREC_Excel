@@ -168,11 +168,11 @@ Public Property Let grupoResidencial(ByVal grupoResidencial As Integer)
     this.grupoResidencial = grupoResidencial
 End Property
 
-Public Property Get mz() As Integer
+Public Property Get mz() As String
     mz = this.mz
 End Property
 
-Public Property Let mz(ByVal mz As Integer)
+Public Property Let mz(ByVal mz As String)
     this.mz = mz
 End Property
 
