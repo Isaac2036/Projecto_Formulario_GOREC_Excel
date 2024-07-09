@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3 
    Caption         =   "UserForm3"
-   ClientHeight    =   5010
+   ClientHeight    =   3120
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   4560
@@ -14,12 +14,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub CommandButton1_Click()
-    Dim r As New Reversion
-    
-    With r
-        .dnis = TextBox1.Value
-       MsgBox TypeName(.dnis)
-    End With
-    
-    
+    frmInsertData.Show
 End Sub
+
+Private Sub CommandButton2_Click()
+    frmVerExpediente.Show
+End Sub
+

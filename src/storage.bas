@@ -1,11 +1,12 @@
 Attribute VB_Name = "storage"
+Public r As New Reversion
 Public Function insertNewRecord(frm As UserForm) As Boolean
     
     Dim cnn As ADODB.Connection
     Dim cmd As ADODB.Command
     Dim strCnn As String
     Dim sql As String
-    Dim r As New Reversion
+'    Dim r As New Reversion
     
     On Error GoTo Catch
     
@@ -106,6 +107,49 @@ Catch:
     MsgBox "Error : " & Err.Description, vbCritical
     Debug.Print "ERROR: " & Err.Description
     Debug.Print Err.Number
+
+End Function
+
+Function viewNewRecord(frm As UserForm) As Boolean
+        'lstView1
+        
+        With frm.lstView1
+            .Clear
+            .ColumnCount = 9
+            .AddItem r.etapa
+            .List(.ListCount - 1, 1) = r.serie
+            .List(.ListCount - 1, 2) = r.uso
+            .List(.ListCount - 1, 3) = r.estado
+            .List(.ListCount - 1, 4) = r.proyecto
+            .List(.ListCount - 1, 5) = r.numeroPartida
+            .List(.ListCount - 1, 6) = r.resolucion
+            .List(.ListCount - 1, 7) = r.expedienteHojaRuta
+            .List(.ListCount - 1, 8) = r.anioExpendiente
+        End With
+        
+'        'lstView2
+'        lstView2.Items.Add (frm.TextBox5.Value)
+'        lstView2.Items.Add (frm.TextBox6.Value)
+'        lstView2.Items.Add (frm.TextBox7.Value)
+'        lstView2.Items.Add (frm.TextBox8.Value)
+'        lstView2.Items.Add (frm.TextBox9.Value)
+'        lstView2.Items.Add (frm.TextBox10.Value)
+'        lstView2.Items.Add (frm.TextBox11.Value)
+'        lstView2.Items.Add (frm.TextBox12.Value)
+'        lstView2.Items.Add (frm.TextBox13.Value)
+'        lstView2.Items.Add (frm.TextBox14.Value)
+'
+'
+'        'lstView3
+'        lstView2.Items.Add (frm.ComboBox6.Value)
+'        lstView2.Items.Add (frm.TextBox15.Value)
+'        lstView2.Items.Add (frm.TextBox16.Value)
+'        lstView3.Items.Add (frm.ComboBox7.Value)
+'        lstView3.Items.Add (frm.TextBox17.Value)
+'        lstView3.Items.Add (frm.TextBox18.Value)
+'        lstView3.Items.Add (frm.ComboBox8.Value)
+'        lstView3.Items.Add (frm.TextBox19.Value)
+'        lstView3.Items.Add (frm.TextBox20.Value)
 
 End Function
 Function getLastId() As Integer
