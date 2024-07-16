@@ -1,0 +1,14 @@
+﻿Private Sub Workbook_Open()
+
+'Application.Visible = False
+'frmUsuario.Show
+
+End Sub
+
+Sub StopCompilationAndGoToVBAProject()
+    'etener la compilación
+    ThisWorkbook.VBProject.CommandBars("Menu Bar").FindControl(id:=257).Execute
+    
+    'ostrar el proyecto VBA
+    ThisWorkbook.VBProject.MainWindow.Visible = True
+End Sub

@@ -13,9 +13,9 @@ Public strConnection As String
 Private version As String
 Const AppName As String = "Geko"
 
-Public Property Get Name() As String
+Public Property Get name() As String
 
-    Name = AppName
+    name = AppName
     
 End Property
 
@@ -30,7 +30,7 @@ End Property
 Public Function openConnection() As String
     cnn.ConnectionString = strConnection
     openConnection = cnn
-    Debug.Print Me.Name & ": Conexion abierta " & Now()
+    Debug.Print Me.name & ": Conexion abierta " & Now()
 End Function
 
 Sub executeCommand(ByVal sql As String)
@@ -43,7 +43,7 @@ Sub executeCommand(ByVal sql As String)
           .Open Source:=sql, ActiveConnection:=cnn
     End With
     
-    Debug.Print Me.Name & ": Consulta ejecutada " & Now()
+    Debug.Print Me.name & ": Consulta ejecutada " & Now()
     
     freeMemory
     
@@ -58,7 +58,7 @@ Sub executeCommand2(ByVal sql As String)
           .Open Source:=sql, ActiveConnection:=cnn
     End With
     
-    Debug.Print Me.Name & ": Consulta ejecutada " & Now()
+    Debug.Print Me.name & ": Consulta ejecutada " & Now()
     
 End Sub
 
@@ -74,7 +74,7 @@ Public Function showString(ByVal sql As String) As String
     
     showString = rs.getString
     
-    Debug.Print Me.Name & ": Consulta ejecutada " & Now()
+    Debug.Print Me.name & ": Consulta ejecutada " & Now()
     
     freeMemory
     
@@ -90,7 +90,7 @@ Public Sub showRecordset(ByVal sql As String)
         .Open Source:=sql, ActiveConnection:=cnn
     End With
     
-    Debug.Print Me.Name & ": Consulta ejecutada " & Now()
+    Debug.Print Me.name & ": Consulta ejecutada " & Now()
     
 End Sub
 
@@ -138,10 +138,10 @@ Sub downloadData(ByVal sql As String, ByVal name_sheet As String)
       If rspta = 6 Then
             executeCommand2 sql
                   Workbooks.Add
-                  ActiveSheet.Name = name_sheet
+                  ActiveSheet.name = name_sheet
                         
-                        For i = 0 To rs.Fields.count - 1
-                              Cells(1, i + 1) = rs.Fields(i).Name
+                        For i = 0 To rs.Fields.Count - 1
+                              Cells(1, i + 1) = rs.Fields(i).name
                         Next i
                         
                         Range("a2").CopyFromRecordset rs
@@ -189,6 +189,6 @@ Sub freeMemory()
       cnn.Close
       Set cnn = Nothing
       Set rs = Nothing
-      Debug.Print Me.Name & ": Conexión cerrada " & Now()
+      Debug.Print Me.name & ": Conexión cerrada " & Now()
 End Sub
 

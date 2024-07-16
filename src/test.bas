@@ -67,10 +67,10 @@ Sub test_read()
 '                Debug.Print .Fields(2)
 '                .MoveNext
 '            Loop
-            For i = 0 To .Fields.count - 1
+            For i = 0 To .Fields.Count - 1
 '                head = head & "," & .Fields(i).Name
                 Debug.Print "valor: "; .Fields(i)
-                Debug.Print "Nombre de campo: "; .Fields(i).Name
+                Debug.Print "Nombre de campo: "; .Fields(i).name
                 Debug.Print "Tipo de campo: "; .Fields(i).Type
                 Debug.Print "=======" & vbCrLf
             Next i
@@ -113,4 +113,3 @@ Function getLastRecord() As Integer
     End If
     
 End Function
-

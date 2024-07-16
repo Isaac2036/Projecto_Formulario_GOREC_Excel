@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Sub chargePrev()
     
     Dim frmViewP As UserForm
@@ -21,99 +22,119 @@ Sub chargePrev()
     Set frmViewP = frmViewPrev
     
      With frmViewP.ListBox1
-        .ColumnCount = 4
-        .ColumnWidths = "150"
+        .ColumnCount = 1
+        .ColumnWidths = "120"
         
         .AddItem ""
-        .AddItem "etapa : "
-        .List(.ListCount - 1, 1) = UCase(Me.ComboBox1.Value)
-        
-        .AddItem "Serie documental/unidad : "
-        .List(.ListCount - 1, 1) = UCase(Me.ComboBox2.Value)
-        
-        .AddItem "Uso : "
-        .List(.ListCount - 1, 1) = UCase(Me.ComboBox3.Value)
-        
-        .AddItem "Estado : "
-        .List(.ListCount - 1, 1) = UCase(Me.ComboBox4.Value)
-        
-        .AddItem "Proyecto y/o subestado : "
-        .List(.ListCount - 1, 1) = UCase(Me.ComboBox5.Value)
+        .list(.ListCount - 1, 0) = UCase(Me.ComboBox1.Value)
         
         .AddItem ""
-        .AddItem "********************"
         .AddItem ""
-        
-        .AddItem "N° de partida : "
-        .List(.ListCount - 1, 1) = UCase(TextBox1.Value)
-        
-        .AddItem "Resolución : "
-        .List(.ListCount - 1, 1) = UCase(TextBox2.Value)
-        
-        .AddItem "Exp/Hoja de ruta : "
-        .List(.ListCount - 1, 1) = UCase(TextBox3.Value)
-        
-        .AddItem "Año de expediente : "
-        .List(.ListCount - 1, 1) = ComboBox9.Value
-        
-        .AddItem "Administrado(s) : "
-        .List(.ListCount - 1, 1) = UCase(TextBox5.Value)
-        
-        .AddItem "Dni : "
-        .List(.ListCount - 1, 1) = TextBox6.Value
-        
-        .AddItem "AA.HH/Pueblo/Zona : "
-        .List(.ListCount - 1, 1) = UCase(TextBox7.Value)
-        
-        .AddItem "Sector : "
-        .List(.ListCount - 1, 1) = UCase(TextBox8.Value)
-        .List(.ListCount - 1, 2) = "Barrio : "
-        .List(.ListCount - 1, 3) = UCase(TextBox9.Value)
-        
-        .AddItem "Grupo Res. : "
-        .List(.ListCount - 1, 1) = UCase(TextBox10.Value)
-        .List(.ListCount - 1, 2) = "Mz : "
-        .List(.ListCount - 1, 3) = UCase(TextBox11.Value)
-        
-        .AddItem "Lote : "
-        .List(.ListCount - 1, 1) = UCase(TextBox12.Value)
-        
-        .AddItem "Asunto/Ultimo doc. p. : "
-        .List(.ListCount - 1, 1) = UCase(TextBox13.Value)
+        .list(.ListCount - 1, 0) = UCase(Me.ComboBox2.Value)
         
         .AddItem ""
-        .AddItem "********************"
         .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(Me.ComboBox3.Value)
         
-        .AddItem "N° folio : "
-        .List(.ListCount - 1, 1) = TextBox14.Value
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(Me.ComboBox4.Value)
         
-        .AddItem "Paquete : "
-        .List(.ListCount - 1, 1) = ComboBox6.Value
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(Me.ComboBox5.Value)
         
-        .AddItem "Ubicación exp. : "
-        .List(.ListCount - 1, 1) = UCase(TextBox15.Value)
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox1.Value)
         
-        .AddItem "Obsevación. : "
-        .List(.ListCount - 1, 1) = UCase(TextBox16.Value)
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox2.Value)
         
-        .AddItem "Profesional a cargo : "
-        .List(.ListCount - 1, 1) = UCase(ComboBox7.Value)
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox3.Value)
         
-        .AddItem "Fecha de última actualización. : "
-        .List(.ListCount - 1, 1) = TextBox17.Value
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = ComboBox9.Value
         
-        .AddItem "Rubro/ comercio/ actividad : "
-        .List(.ListCount - 1, 1) = TextBox18.Value
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox5.Value)
         
-        .AddItem "Area : "
-        .List(.ListCount - 1, 1) = UCase(ComboBox8.Value)
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox6.Value
         
-        .AddItem "Contacto : "
-        .List(.ListCount - 1, 1) = UCase(TextBox19.Value)
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox7.Value)
         
-        .AddItem "Metro : "
-        .List(.ListCount - 1, 1) = TextBox20.Value & "M2"
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox8.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox9.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox10.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox11.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox12.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox13.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox14.Value
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = ComboBox6.Value
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox15.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox16.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(ComboBox7.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox17.Value
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox18.Value
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(ComboBox8.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = UCase(TextBox19.Value)
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox20.Value & " M2"
         
     End With
         
@@ -149,10 +170,6 @@ Private Sub TextBox10_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     If KeyAscii < 48 Or KeyAscii > 57 Then
         KeyAscii = 0
     End If
-End Sub
-
-Private Sub TextBox11_Change()
-
 End Sub
 
 Private Sub TextBox12_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)

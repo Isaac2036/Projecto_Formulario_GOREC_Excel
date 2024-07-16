@@ -1,4 +1,4 @@
-Attribute VB_Name = "utils"
+Attribute VB_Name = "utils_edit"
 Function isInputEmpty(frm As UserForm) As Boolean
 
     Dim backColor As Long
@@ -47,35 +47,35 @@ Sub configFrm(frm As UserForm)
 
     'frame1
     With frm
-        .ComboBox1.TabIndex = 0
-        .ComboBox2.TabIndex = 1
-        .ComboBox3.TabIndex = 2
-        .ComboBox4.TabIndex = 3
-        .ComboBox5.TabIndex = 4
+        .cmBox1.TabIndex = 0
+        .cmBox2.TabIndex = 1
+        .cmBox3.TabIndex = 2
+        .cmBox4.TabIndex = 3
+        .cmBox5.TabIndex = 4
     End With
     
     With frm.Frame1
-        With .ComboBox1
+        With .cmBox1
                 .AddItem "Pendiente"
                 .AddItem "Asignado"
                 .AddItem "Evaluando"
                 .ListIndex = 0
         End With
         
-        With .ComboBox2
+        With .cmBox2
             .AddItem "reversion"
             .ListIndex = 0
             .Enabled = False
         End With
         
-        With .ComboBox3
+        With .cmBox3
             .AddItem "vivienda"
             .AddItem "comercial"
             .AddItem "publico"
             .ListIndex = 0
         End With
         
-         With .ComboBox4
+         With .cmBox4
             .AddItem "pendiente de asignación"
             .AddItem "pendiente de revisión"
             .AddItem "pendiente notificación"
@@ -85,7 +85,7 @@ Sub configFrm(frm As UserForm)
             .ListIndex = 0
         End With
         
-        With .ComboBox5
+        With .cmBox5
             .AddItem "PECP"
             .ListIndex = 0
             .Enabled = False
@@ -94,22 +94,22 @@ Sub configFrm(frm As UserForm)
     
     'frame 2
     With frm
-        .TextBox1.TabIndex = 5
-        .TextBox2.TabIndex = 6
-        .TextBox3.TabIndex = 7
-        .ComboBox9.TabIndex = 8
-        .TextBox5.TabIndex = 9
-        .TextBox6.TabIndex = 10
-        .TextBox7.TabIndex = 11
-        .TextBox8.TabIndex = 12
-        .TextBox9.TabIndex = 13
-        .TextBox10.TabIndex = 14
-        .TextBox11.TabIndex = 15
-        .TextBox12.TabIndex = 16
+        .txtBox1.TabIndex = 5
+        .txtBox2.TabIndex = 6
+        .txtBox3.TabIndex = 7
+        .cmBox6.TabIndex = 8
+        .txtBox4.TabIndex = 9
+        .txtBox5.TabIndex = 10
+        .txtBox6.TabIndex = 11
+        .txtBox7.TabIndex = 12
+        .txtBox8.TabIndex = 13
+        .txtBox9.TabIndex = 14
+        .txtBox10.TabIndex = 15
+        .txtBox11.TabIndex = 16
     End With
     
     With frm.Frame2
-        With .ComboBox9
+        With .cmBox6
             For i = 2000 To 2024
                 .AddItem i
             Next i
@@ -118,59 +118,55 @@ Sub configFrm(frm As UserForm)
             .MaxLength = 4
         End With
         
-        .TextBox10.MaxLength = 4
-        .TextBox11.MaxLength = 2
-        .TextBox12.MaxLength = 3
+        .txtBox9.MaxLength = 4
+        .txtBox10.MaxLength = 2
+        .txtBox11.MaxLength = 3
         
     End With
 
 '    Frame 3
     With frm
-        .TextBox13.TabIndex = 17
-        .TextBox14.TabIndex = 18
-        .ComboBox6.TabIndex = 19
-        .TextBox15.TabIndex = 20
-        .TextBox16.TabIndex = 21
-        .ComboBox7.TabIndex = 22
-        .TextBox17.TabIndex = 23
-        .TextBox18.TabIndex = 24
-        .ComboBox8.TabIndex = 25
-        .TextBox19.TabIndex = 26
-        .TextBox20.TabIndex = 27
+        .txtBox12.TabIndex = 17
+        .txtBox13.TabIndex = 18
+        .cmBox7.TabIndex = 19
+        .txtBox14.TabIndex = 20
+        .txtBox15.TabIndex = 21
+        .cmBox8.TabIndex = 22
+        .txtBox16.TabIndex = 23
+        .txtBox17.TabIndex = 24
+        .cmBox9.TabIndex = 25
+        .txtBox18.TabIndex = 26
+        .txtBox19.TabIndex = 27
     End With
     
     With frm.Frame3
-        With .ComboBox6
+        With .cmBox7
             For i = 1 To 9
                 .AddItem "GABETA " & i
             Next i
             .ListIndex = 0
         End With
         
-        With .TextBox16
+        With .txtBox15
             .WordWrap = True
             .MultiLine = True
             .EnterKeyBehavior = True
             .ScrollBars = fmScrollBarsVertical
         End With
         
-        With .ComboBox7
+        With .cmBox8
             .RowSource = "nombre_abogados"
         End With
         
-         With .ComboBox8
+         With .cmBox9
             .AddItem "OGP"
             .ListIndex = 0
             .Enabled = False
         End With
         
-        .TextBox14.MaxLength = 4
-        .TextBox17.Value = Date
+        .txtBox13.MaxLength = 4
+        .txtBox16.Value = Date
         
     End With
     
 End Sub
-
-
-
-
