@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3 
    Caption         =   "UserForm3"
-   ClientHeight    =   3120
+   ClientHeight    =   4725
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   4560
@@ -21,3 +21,14 @@ Private Sub CommandButton2_Click()
     frmVerExpediente.Show
 End Sub
 
+Private Sub CommandButton4_Click()
+    Unload Me
+End Sub
+
+Private Sub UserForm_Click()
+
+End Sub
+
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+    MsgBox CloseMode
+End Sub

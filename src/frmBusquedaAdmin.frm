@@ -17,12 +17,20 @@ Private Sub CommandButton1_Click()
 
     Dim partida As String
     Dim expediente As String
-    Dim anio As Integer
+    Dim anio As Variant
+    Dim list As MSForms.ListBox
+    
+    Set list = Me.ListBox1
+    
+    With list
+        .Clear
+        .ColumnCount = 3
+    End With
     
     partida = TextBox2.Text
     expediente = TextBox3.Text
-    anio = VBA.IIf(IsNumeric(TextBox18.Text), TextBox18.Text, 0)
+    anio = VBA.IIf(IsNumeric(TextBox18.Text), TextBox18.Text, Null)
     
-    Call storage.searchExpediente(Me.ListBox1, partida, expediente, anio)
+    Call storage.filterByMultipleCriteria(list, partida, anio, expediente)
     
 End Sub

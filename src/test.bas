@@ -1,15 +1,4 @@
 Attribute VB_Name = "test"
-Sub test_reversion()
-    
-    Dim r As New Reversion
-    
-    With r
-        .dnis = "4589521"
-        Debug.Print TypeName(.dnis)
-    End With
-    
-    
-End Sub
 Sub test_()
     Dim gk As New Geko
     Dim sql As String
@@ -113,3 +102,7 @@ Function getLastRecord() As Integer
     End If
     
 End Function
+
+Sub test_125()
+    Call ConsultaDinamica
+End Sub

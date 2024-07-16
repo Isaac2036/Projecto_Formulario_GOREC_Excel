@@ -71,3 +71,13 @@ TextBox1.Text = ""
 MsgBox "EL NOMBRE QUE HA COLOCADO NO EXISTE", vbCritical, "INICIAR SESIÓN"
 
 End Sub
+
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+    
+    Application.Visible = True
+     
+    If CloseMode = 0 Then
+        ThisWorkbook.Close savechanges:=False
+    End If
+    
+End Sub

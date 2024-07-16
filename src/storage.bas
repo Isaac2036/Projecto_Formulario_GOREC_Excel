@@ -1,6 +1,80 @@
 Attribute VB_Name = "storage"
 Public r As New Reversion
-Sub searchExpediente(list As MSForms.ListBox, Optional partida As String, Optional expediente As String, Optional anio As Integer)
+Sub filterByMultipleCriteria(list As MSForms.ListBox, Optional nPartida As String = "", Optional anio As Variant = Null, Optional nExpediente As String = "")
+
+    Dim strSQL As String
+    Dim cnn As ADODB.Connection
+    Dim cmd As ADODB.Command
+    Dim rs As ADODB.Recordset
+    Dim firstCondition As Boolean
+
+    Set cnn = New ADODB.Connection
+    cnn.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
+
+    Set cmd = New ADODB.Command
+    cmd.ActiveConnection = cnn
+
+    strSQL = "SELECT nro_partida, expediente, anio FROM reversion"
+    firstCondition = True
+
+    If nPartida <> "" Then
+        If firstCondition Then
+            strSQL = strSQL & " WHERE"
+            firstCondition = False
+        Else
+            strSQL = strSQL & " AND"
+        End If
+        strSQL = strSQL & " nro_partida = ?"
+        cmd.Parameters.Append cmd.CreateParameter("nr_partida", adVarChar, adParamInput, 255, nPartida)
+    End If
+
+    If Not IsNull(anio) Then
+        If firstCondition Then
+            strSQL = strSQL & " WHERE"
+            firstCondition = False
+        Else
+            strSQL = strSQL & " AND"
+        End If
+        strSQL = strSQL & " anio = ?"
+        cmd.Parameters.Append cmd.CreateParameter("anio", adInteger, adParamInput, , anio)
+    End If
+
+    If nExpediente <> "" Then
+        If firstCondition Then
+            strSQL = strSQL & " WHERE"
+            firstCondition = False
+        Else
+            strSQL = strSQL & " AND"
+        End If
+        strSQL = strSQL & " expediente = ?"
+        cmd.Parameters.Append cmd.CreateParameter("expediente", adVarChar, adParamInput, 255, nExpediente)
+    End If
+    
+    Debug.Print strSQL
+    
+    cmd.CommandText = strSQL
+    cmd.CommandType = adCmdText
+
+    Set rs = cmd.Execute
+
+    If rs.EOF And rs.BOF Then
+        list.AddItem "No hay registros para mostrar."
+    Else
+        rs.MoveFirst
+        Do While Not rs.EOF
+            list.AddItem rs.Fields(0)
+            list.list(list.ListCount - 1, 1) = rs.Fields(1)
+            list.list(list.ListCount - 1, 2) = rs.Fields(2)
+            rs.MoveNext
+        Loop
+    End If
+    
+    rs.Close
+    Set rs = Nothing
+    cnn.Close
+    Set cnn = Nothing
+End Sub
+Sub filterByMultipleCriteria2(list As MSForms.ListBox, Optional partida As String, Optional expediente As String, Optional anio As Integer)
 
      
     Dim pd As New Geko
