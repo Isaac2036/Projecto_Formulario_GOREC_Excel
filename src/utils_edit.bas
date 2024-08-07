@@ -135,8 +135,9 @@ Sub configFrm(frm As UserForm)
         .txtBox16.TabIndex = 23
         .txtBox17.TabIndex = 24
         .cmBox9.TabIndex = 25
-        .txtBox18.TabIndex = 26
-        .txtBox19.TabIndex = 27
+        .TextBox21.TabIndex = 26
+        .txtBox18.TabIndex = 27
+        .txtBox19.TabIndex = 28
     End With
     
     With frm.Frame3

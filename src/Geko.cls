@@ -164,7 +164,7 @@ Sub LoadCtrlList(ByVal sql As String, ByVal index, ByVal ctrl As MSForms.control
      
       executeCommand2 sql
             
-            If TypeOf ctrl Is MSForms.ComboBox Or TypeOf ctrl Is MSForms.ListBox Then
+            If TypeOf ctrl Is MSForms.ComboBox Or TypeOf ctrl Is MSForms.listBox Then
                   ctrl.Clear
                   
                   rs.MoveFirst

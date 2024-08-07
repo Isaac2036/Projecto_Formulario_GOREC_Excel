@@ -1,6 +1,28 @@
 Attribute VB_Name = "storage"
 Public r As New Reversion
-Sub filterByMultipleCriteria(list As MSForms.ListBox, Optional nPartida As String = "", Optional anio As Variant = Null, Optional nExpediente As String = "")
+Function deleteFilesForID(id As Integer, tableName As String) As Boolean
+
+    Dim gk As New Geko
+    Dim sql As String
+    Dim strCnn As String
+    
+    On Error GoTo Catch
+    
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
+    sql = "delete from " & tableName & " where id = " & id
+    
+    gk.strConnection = strCnn
+    gk.executeCommand (sql)
+    
+    deleteFilesForID = True
+    
+    Exit Function
+Catch:
+    Debug.Print Err.Number
+    Debug.Print Err.Description
+    Err.Raise Err.Number, Description:=Err.Description
+End Function
+Sub filterByMultipleCriteria(list As MSForms.listBox, Optional nPartida As String = "", Optional anio As Variant = Null, Optional nExpediente As String = "")
 
     Dim strSQL As String
     Dim cnn As ADODB.Connection
@@ -14,7 +36,7 @@ Sub filterByMultipleCriteria(list As MSForms.ListBox, Optional nPartida As Strin
     Set cmd = New ADODB.Command
     cmd.ActiveConnection = cnn
 
-    strSQL = "SELECT nro_partida, expediente, anio FROM reversion"
+    strSQL = "SELECT id, nro_partida, expediente, anio FROM reversion"
     firstCondition = True
 
     If nPartida <> "" Then
@@ -58,13 +80,14 @@ Sub filterByMultipleCriteria(list As MSForms.ListBox, Optional nPartida As Strin
     Set rs = cmd.Execute
 
     If rs.EOF And rs.BOF Then
-        list.AddItem "No hay registros para mostrar."
+        'nada
     Else
         rs.MoveFirst
         Do While Not rs.EOF
             list.AddItem rs.Fields(0)
             list.list(list.ListCount - 1, 1) = rs.Fields(1)
             list.list(list.ListCount - 1, 2) = rs.Fields(2)
+            list.list(list.ListCount - 1, 3) = rs.Fields(3)
             rs.MoveNext
         Loop
     End If
@@ -74,7 +97,7 @@ Sub filterByMultipleCriteria(list As MSForms.ListBox, Optional nPartida As Strin
     cnn.Close
     Set cnn = Nothing
 End Sub
-Sub filterByMultipleCriteria2(list As MSForms.ListBox, Optional partida As String, Optional expediente As String, Optional anio As Integer)
+Sub filterByMultipleCriteria2(list As MSForms.listBox, Optional partida As String, Optional expediente As String, Optional anio As Integer)
 
      
     Dim pd As New Geko
@@ -127,6 +150,7 @@ Public Function insertNewRecord(frm As UserForm) As Boolean
         .resolucion = frm.TextBox2.Value
         .expedienteHojaRuta = frm.TextBox3.Value
         .anioExpendiente = frm.ComboBox9.Value
+        .sgd = frm.TextBox21.Value
         .administrado = frm.TextBox5.Value
         .dnis = frm.TextBox6.Value
         .zona = frm.TextBox7.Value
@@ -156,7 +180,7 @@ Public Function insertNewRecord(frm As UserForm) As Boolean
     ' Configurar el comando
     Set cmd = New ADODB.Command
     sql = "INSERT INTO reversion (ID, ETAPA, Serie, USO, ESTADO, Proyecto, Nro_partida, RESOLUCION,"
-    sql = sql & " Expediente, anio, Administrados, Dni, Zona, Sector, Barrio, Grupo_Residencial, Manzana, LOTE, Ultimo_documento, Nro_folio, PAQUETE,"
+    sql = sql & " Expediente, anio, sgd, Administrados, Dni, Zona, Sector, Barrio, Grupo_Residencial, Manzana, LOTE, Ultimo_documento, Nro_folio, PAQUETE,"
     sql = sql & " ubicacion_expediente, Observacion, Profesional, fecha_atualizacion, Rubro, AREA, Contacto, METRO)"
     sql = sql & " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
@@ -176,6 +200,7 @@ Public Function insertNewRecord(frm As UserForm) As Boolean
         .Parameters.Append .CreateParameter("RESOLUCION", 202, adParamInput, 255, r.resolucion)
         .Parameters.Append .CreateParameter("Expediente", 202, adParamInput, 255, r.expedienteHojaRuta)
         .Parameters.Append .CreateParameter("anio", 5, adParamInput, , r.anioExpendiente)
+        .Parameters.Append .CreateParameter("sgd", 5, adParamInput, , r.sgd)
         .Parameters.Append .CreateParameter("Administrados", 203, adParamInput, 255, r.administrado)
         .Parameters.Append .CreateParameter("Dni", 203, adParamInput, 255, r.dnis)
         .Parameters.Append .CreateParameter("Zona", 202, adParamInput, 255, r.zona)
@@ -237,6 +262,7 @@ Public Function insertEditRecord(frm As UserForm) As Boolean
         .resolucion = frm.TextBox2.Value
         .expedienteHojaRuta = frm.TextBox3.Value
         .anioExpendiente = frm.ComboBox9.Value
+        .sgd = frm.TextBox21.Value
         .administrado = frm.TextBox5.Value
         .dnis = frm.TextBox6.Value
         .zona = frm.TextBox7.Value
@@ -266,7 +292,7 @@ Public Function insertEditRecord(frm As UserForm) As Boolean
     ' Configurar el comando
     Set cmd = New ADODB.Command
     sql = "INSERT INTO reversion (ID, ETAPA, Serie, USO, ESTADO, Proyecto, Nro_partida, RESOLUCION,"
-    sql = sql & " Expediente, anio, Administrados, Dni, Zona, Sector, Barrio, Grupo_Residencial, Manzana, LOTE, Ultimo_documento, Nro_folio, PAQUETE,"
+    sql = sql & " Expediente, anio, sgd, Administrados, Dni, Zona, Sector, Barrio, Grupo_Residencial, Manzana, LOTE, Ultimo_documento, Nro_folio, PAQUETE,"
     sql = sql & " ubicacion_expediente, Observacion, Profesional, fecha_atualizacion, Rubro, AREA, Contacto, METRO)"
     sql = sql & " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
@@ -286,6 +312,7 @@ Public Function insertEditRecord(frm As UserForm) As Boolean
         .Parameters.Append .CreateParameter("RESOLUCION", 202, adParamInput, 255, r.resolucion)
         .Parameters.Append .CreateParameter("Expediente", 202, adParamInput, 255, r.expedienteHojaRuta)
         .Parameters.Append .CreateParameter("anio", 5, adParamInput, , r.anioExpendiente)
+        .Parameters.Append .CreateParameter("sgd", 5, adParamInput, , r.sgd)
         .Parameters.Append .CreateParameter("Administrados", 203, adParamInput, 255, r.administrado)
         .Parameters.Append .CreateParameter("Dni", 203, adParamInput, 255, r.dnis)
         .Parameters.Append .CreateParameter("Zona", 202, adParamInput, 255, r.zona)
@@ -400,6 +427,14 @@ Function getLastId() As Integer
     
 End Function
 
+
+Public Function consulExp(frm As UserForm) As Boolean
+
+    
+
+End Function
+
+
 'Function editNewRecord(frm As UserForm) As Boolean
 '
 '    Dim cnn As ADODB.Connection
@@ -478,4 +513,10 @@ End Function
 '
 '
 'End Function
+
+Public Function buscarExpediente(frm As UserForm) As Boolean
+
+
+End Function
+End Function
 

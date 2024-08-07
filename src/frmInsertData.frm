@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmInsertData 
    Caption         =   "Insertar Expedientes"
-   ClientHeight    =   7875
+   ClientHeight    =   8145
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   16680
@@ -13,7 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 
 Sub chargePrev()
     
@@ -59,6 +58,10 @@ Sub chargePrev()
         .AddItem ""
         .AddItem ""
         .list(.ListCount - 1, 0) = ComboBox9.Value
+        
+        .AddItem ""
+        .AddItem ""
+        .list(.ListCount - 1, 0) = TextBox21.Value
         
         .AddItem ""
         .AddItem ""
@@ -149,14 +152,17 @@ Private Sub CommandButton13_Click()
         frmViewPrev.Show
         
     End If
-    
-    
+     
 End Sub
 Private Sub CommandButton16_Click()
 
     Call utils.clearInputs(Me)
     Call utils.configFrm(Me)
     
+End Sub
+
+Private Sub Frame6_Click()
+
 End Sub
 
 Private Sub Label425_Click()

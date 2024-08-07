@@ -1,7 +1,7 @@
 ﻿Private Sub Workbook_Open()
 
-    Application.Visible = False
-    frmUsuario.Show
+'    Application.Visible = False
+'    frmUsuario.Show
 
 End Sub
 

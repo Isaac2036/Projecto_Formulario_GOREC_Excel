@@ -18,6 +18,7 @@ Private Type data
     resolucion As String
     expedienteHojaRuta As String
     anioExpendiente As Integer
+    sgd As Integer
     administrado As String
     dnis As String
     zona As String
@@ -120,6 +121,13 @@ Public Property Let anioExpendiente(ByVal anioExpendiente As Integer)
     this.anioExpendiente = UCase(anioExpendiente)
 End Property
 
+Public Property Get sgd() As Integer
+    sgd = this.sgd
+End Property
+
+Public Property Let sgd(ByVal sgd As Integer)
+    this.sgd = UCase(sgd)
+End Property
 Public Property Get administrado() As String
     administrado = this.administrado
 End Property

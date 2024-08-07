@@ -98,14 +98,15 @@ Sub configFrm(frm As UserForm)
         .TextBox2.TabIndex = 6
         .TextBox3.TabIndex = 7
         .ComboBox9.TabIndex = 8
-        .TextBox5.TabIndex = 9
-        .TextBox6.TabIndex = 10
-        .TextBox7.TabIndex = 11
-        .TextBox8.TabIndex = 12
-        .TextBox9.TabIndex = 13
-        .TextBox10.TabIndex = 14
-        .TextBox11.TabIndex = 15
-        .TextBox12.TabIndex = 16
+        .TextBox21.TabIndex = 9
+        .TextBox5.TabIndex = 10
+        .TextBox6.TabIndex = 11
+        .TextBox7.TabIndex = 12
+        .TextBox8.TabIndex = 13
+        .TextBox9.TabIndex = 14
+        .TextBox10.TabIndex = 15
+        .TextBox11.TabIndex = 16
+        .TextBox12.TabIndex = 17
     End With
     
     With frm.Frame2
@@ -126,17 +127,17 @@ Sub configFrm(frm As UserForm)
 
 '    Frame 3
     With frm
-        .TextBox13.TabIndex = 17
-        .TextBox14.TabIndex = 18
-        .ComboBox6.TabIndex = 19
-        .TextBox15.TabIndex = 20
-        .TextBox16.TabIndex = 21
-        .ComboBox7.TabIndex = 22
-        .TextBox17.TabIndex = 23
-        .TextBox18.TabIndex = 24
-        .ComboBox8.TabIndex = 25
-        .TextBox19.TabIndex = 26
-        .TextBox20.TabIndex = 27
+        .TextBox13.TabIndex = 18
+        .TextBox14.TabIndex = 19
+        .ComboBox6.TabIndex = 20
+        .TextBox15.TabIndex = 21
+        .TextBox16.TabIndex = 22
+        .ComboBox7.TabIndex = 23
+        .TextBox17.TabIndex = 24
+        .TextBox18.TabIndex = 25
+        .ComboBox8.TabIndex = 26
+        .TextBox19.TabIndex = 27
+        .TextBox20.TabIndex = 28
     End With
     
     With frm.Frame3

@@ -14,6 +14,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub ComboBox1_Change()
+
+End Sub
+
 Private Sub CommandButton1_Click()
 
 Dim nombre As String
@@ -36,12 +40,12 @@ If nombre = "" Then 'Si no se coloca el nombre del usuario se muestra un mensaje
 Else
 
     'Fórmula para buscar la contraseña en la tabla de usuarios en base a nombre de usuario
-    
+
     passw = Application.WorksheetFunction.VLookup(nombre, [Tabla_Usuarios], 2, False)
     privil = Application.WorksheetFunction.VLookup(nombre, [Tabla_Usuarios], 3, False)
-    
+
     If contras = passw Then 'Si la contraseña ingresada en el textbox es igual al password encontrado pasa lo siguiente:
-        
+
         If privil = "Administrador" Then
             Unload frmUsuario ' Se cierra el formulario
             frmBienvenidosAdmin.Show
@@ -54,11 +58,11 @@ Else
                 frmBienvenidosUsuarios.Show
             End If
         End If
-        
+
     Else
-        
+
         MsgBox "CONTRASEÑA INCORRECTA"
-        
+
     End If
 
 End If
@@ -73,11 +77,14 @@ MsgBox "EL NOMBRE QUE HA COLOCADO NO EXISTE", vbCritical, "INICIAR SESIÓN"
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-    
+
     Application.Visible = True
-     
+
     If CloseMode = 0 Then
         ThisWorkbook.Close savechanges:=False
     End If
-    
+
+End Sub
+Private Sub UserForm_Click()
+
 End Sub

@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmBienvenidosTotal 
    Caption         =   "Gobierno Regional del Callao"
-   ClientHeight    =   9735.001
+   ClientHeight    =   7125
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   12960
+   ClientWidth     =   7410
    OleObjectBlob   =   "frmBienvenidosTotal.frx":0000
    StartUpPosition =   1  'Centrar en propietario
 End
@@ -58,7 +58,6 @@ Sub TerminarCompilacion()
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-
 Application.Visible = True
 Unload Me
 
