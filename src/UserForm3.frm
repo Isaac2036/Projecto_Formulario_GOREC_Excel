@@ -25,10 +25,6 @@ Private Sub CommandButton4_Click()
     Unload Me
 End Sub
 
-Private Sub UserForm_Click()
-
-End Sub
-
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     MsgBox CloseMode
 End Sub

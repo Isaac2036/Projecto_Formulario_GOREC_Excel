@@ -32,6 +32,3 @@ Private Sub CommandButton2_Click()
     Unload Me
 End Sub
 
-Private Sub ListBox1_Click()
-
-End Sub

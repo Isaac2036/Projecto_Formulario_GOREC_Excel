@@ -14,16 +14,12 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
-Private Sub ComboBox1_Change()
-
-End Sub
-
 Private Sub CommandButton1_Click()
 
 Dim nombre As String
 Dim contras As String
 Dim passw As String
-Dim privil As String
+'Dim privil As String
 Dim numhojas As Integer
 
 On Error GoTo LineaError
@@ -83,8 +79,5 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     If CloseMode = 0 Then
         ThisWorkbook.Close savechanges:=False
     End If
-
-End Sub
-Private Sub UserForm_Click()
 
 End Sub

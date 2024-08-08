@@ -161,10 +161,6 @@ Private Sub CommandButton16_Click()
     
 End Sub
 
-Private Sub Frame6_Click()
-
-End Sub
-
 Private Sub Label425_Click()
 
     Set ctrlFecha = TextBox17

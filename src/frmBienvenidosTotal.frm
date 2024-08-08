@@ -14,11 +14,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
-
-
 Private Sub cmButt1_Click()
     
-frmBusquedaAdmin.Show
+    frmSearchFiles.Show
     
 End Sub
 
@@ -57,9 +55,16 @@ Sub TerminarCompilacion()
     MsgBox "Compilación terminada"
 End Sub
 
+Private Sub UserForm_Initialize()
+
+    If privil <> "Total" Then btnAccessCodeVBA.Visible = False
+    
+End Sub
+
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-Application.Visible = True
-Unload Me
+
+    Application.Visible = True
+    Unload Me
 
 End Sub
 

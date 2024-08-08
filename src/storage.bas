@@ -1,6 +1,5 @@
 Attribute VB_Name = "storage"
-Public r As New Reversion
-Function deleteFilesForID(id As Integer, tableName As String) As Boolean
+Function deleteFilesForNumber(numPartida As String, tableName As String) As Boolean
 
     Dim gk As New Geko
     Dim sql As String
@@ -9,12 +8,12 @@ Function deleteFilesForID(id As Integer, tableName As String) As Boolean
     On Error GoTo Catch
     
     strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
-    sql = "delete from " & tableName & " where id = " & id
+    sql = "delete from " & tableName & " where nro_partida = '" & numPartida & "'"
     
     gk.strConnection = strCnn
     gk.executeCommand (sql)
     
-    deleteFilesForID = True
+    deleteFilesForNumber = True
     
     Exit Function
 Catch:
@@ -36,7 +35,7 @@ Sub filterByMultipleCriteria(list As MSForms.listBox, Optional nPartida As Strin
     Set cmd = New ADODB.Command
     cmd.ActiveConnection = cnn
 
-    strSQL = "SELECT id, nro_partida, expediente, anio FROM reversion"
+    strSQL = "SELECT nro_partida, expediente, anio FROM reversion"
     firstCondition = True
 
     If nPartida <> "" Then
@@ -87,7 +86,6 @@ Sub filterByMultipleCriteria(list As MSForms.listBox, Optional nPartida As Strin
             list.AddItem rs.Fields(0)
             list.list(list.ListCount - 1, 1) = rs.Fields(1)
             list.list(list.ListCount - 1, 2) = rs.Fields(2)
-            list.list(list.ListCount - 1, 3) = rs.Fields(3)
             rs.MoveNext
         Loop
     End If
@@ -238,7 +236,7 @@ Catch:
     MsgBox "Error : " & Err.Description, vbCritical
     Debug.Print "ERROR: " & Err.Description
     Debug.Print Err.Number
-
+    On Error GoTo 0
 End Function
 
 Public Function insertEditRecord(frm As UserForm) As Boolean
@@ -350,7 +348,7 @@ Catch:
     MsgBox "Error : " & Err.Description, vbCritical
     Debug.Print "ERROR: " & Err.Description
     Debug.Print Err.Number
-
+    On Error GoTo 0
 End Function
 
 Function viewNewRecord(frm As UserForm) As Boolean
@@ -426,97 +424,48 @@ Function getLastId() As Integer
     End With
     
 End Function
-
-
-Public Function consulExp(frm As UserForm) As Boolean
-
+Sub getFilesForNumber(list As MSForms.listBox, frame As MSForms.frame, numberFiles As String)
     
+    Dim pd As New Geko
+    Dim sql As String
+    Dim strCnn As String
+    Dim rs As ADODB.Recordset
+    Dim fieldCount As Integer
+    
+    On Error GoTo Catch
+    
+    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
+    sql = "select * from reversion where nro_partida = '" & numberFiles & "'"
+    
+    pd.strConnection = strCnn
+    pd.showRecordset (sql)
+    
+    With pd.rs
+        If Not .EOF Then
+            
+            frame.Caption = "Expediente " & numberFiles
+            frame.Font.Bold = True
+            
+            fieldCount = .Fields.Count
 
-End Function
+            list.Clear
+            list.ColumnCount = 2
+            list.ColumnWidths = "100;300"
+            
+            For i = 0 To fieldCount - 1
+                 list.AddItem
+                 list.list(i, 0) = UCase(Replace(.Fields(i).name, "_", " "))
+                 list.list(i, 1) = .Fields(i).Value
+            Next i
+            
+        End If
+    End With
+    
+    Exit Sub
+Catch:
 
-
-'Function editNewRecord(frm As UserForm) As Boolean
-'
-'    Dim cnn As ADODB.Connection
-'    Dim cmd As ADODB.Command
-'    Dim rs As ADODB.Recordset
-'    Set rs = New ADODB.Recordset
-'    Dim strCnn As String
-'    Dim sql As String
-''    Dim r As New Reversion
-'
-'    ' Configurar la conexión
-'    Set cnn = New ADODB.Connection
-'    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
-'    cnn.Open strCnn
-'    rs.Open strCnn, cnn
-'
-'    ' Configurar el comando
-'    Set cmd = New ADODB.Command
-'    sql = "SELECT (ID, ETAPA, Serie, USO, ESTADO, Proyecto, Nro_partida, RESOLUCION,"
-'    sql = sql & " Expediente, anio, Administrados, Dni, Zona, Sector, Barrio, Grupo_Residencial, Manzana, LOTE, Ultimo_documento, Nro_folio, PAQUETE,"
-'    sql = sql & " ubicacion_expediente, Observacion, Profesional, fecha_atualizacion, Rubro, AREA, Contacto, METRO) FROM reversion ORDER BY id DESC LIMIT 1;"
-'
-'
-'    On Error GoTo Catch
-'
-'        If Not rs.EOF Then
-'            Dim datos As New Collection
-'            datos.Add rs!campo1
-'            datos.Add rs!campo2
-'            datos.Add rs!campo3
-'            datos.Add rs!campo4
-'            datos.Add rs!campo5
-'            datos.Add rs!campo6
-'            datos.Add rs!campo7
-'            datos.Add rs!campo8
-'            datos.Add rs!campo9
-'            datos.Add rs!campo10
-'            datos.Add rs!campo11
-'            datos.Add rs!campo12
-'            datos.Add rs!campo13
-'            datos.Add rs!campo14
-'            datos.Add rs!campo15
-'            datos.Add rs!campo16
-'            datos.Add rs!campo17
-'            datos.Add rs!campo18
-'            datos.Add rs!campo19
-'            datos.Add rs!campo20
-'            datos.Add rs!campo21
-'            datos.Add rs!campo22
-'            datos.Add rs!campo23
-'            datos.Add rs!campo24
-'            datos.Add rs!campo25
-'            datos.Add rs!campo26
-'            datos.Add rs!campo27
-'            datos.Add rs!campo28
-'            datos.Add rs!campo29
-'        End If
-'
-'        Dim frmEditarExp As New frmDestino
-'        frmEditarExp.RecibirDatos datos
-'        frmDestino.Show
-'
-'        rs.Close
-'        conn.Close
-'        Set rs = Nothing
-'        Set conn = Nothing
-'
-'    editNewRecord = True
-'    Exit Function
-'
-'Catch:
-'
-'    MsgBox "Error : " & Err.Description, vbCritical
-'    Debug.Print "ERROR: " & Err.Description
-'    Debug.Print Err.Number
-'
-'
-'End Function
-
-Public Function buscarExpediente(frm As UserForm) As Boolean
-
-
-End Function
-End Function
+    Err.Raise Err.Number, Description:=Err.Description
+    On Error GoTo 0
+    
+End Sub
 
