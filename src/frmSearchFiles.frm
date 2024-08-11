@@ -75,6 +75,7 @@ Private Sub btnViewFiles_Click()
     Dim numberFiles As String
     Dim list As MSForms.listBox
     Dim frame As MSForms.frame
+    Dim data(28, 1) As Variant
     
     On Error GoTo Catch
     
@@ -84,7 +85,7 @@ Private Sub btnViewFiles_Click()
     With ListBox1
         If .ListIndex <> -1 Then
             numberFiles = .list(.ListIndex, 0)
-            Call storage.getFilesForNumber(list, frame, numberFiles)
+            Call storage.showFileInDetailFiles(numberFiles, data, list, frame)
             frmViewDetailFiles.Show
         Else
             MsgBox "Debe seleccionar un elemento de la lista"

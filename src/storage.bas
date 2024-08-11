@@ -402,6 +402,25 @@ Function viewNewRecord(frm As UserForm) As Boolean
         End With
 
 End Function
+Sub showFileInDetailFiles(numberFiles As String, structData As Variant, list As MSForms.listBox, frame As MSForms.frame)
+    
+    getFilesForNumber numberFiles, structData
+    
+    With list
+        .Clear
+        .ColumnCount = 2
+        .ColumnWidths = "100;300"
+        .list = structData
+    End With
+    
+    If list.ListCount > 2 Then
+        With frame
+            .Caption = "Expediente " & numberFiles
+            .Font.Bold = True
+        End With
+    End If
+    
+End Sub
 Function getLastId() As Integer
     
     Dim pd As New Geko
@@ -424,16 +443,18 @@ Function getLastId() As Integer
     End With
     
 End Function
-Sub getFilesForNumber(list As MSForms.listBox, frame As MSForms.frame, numberFiles As String)
+Function getFilesForNumber(numberFiles As String, structData As Variant) As Variant
     
     Dim pd As New Geko
     Dim sql As String
     Dim strCnn As String
     Dim rs As ADODB.Recordset
     Dim fieldCount As Integer
+    Dim k As String
+    Dim v As Variant
     
     On Error GoTo Catch
-    
+        
     strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\expedienteBase.accdb"
     sql = "select * from reversion where nro_partida = '" & numberFiles & "'"
     
@@ -441,31 +462,40 @@ Sub getFilesForNumber(list As MSForms.listBox, frame As MSForms.frame, numberFil
     pd.showRecordset (sql)
     
     With pd.rs
-        If Not .EOF Then
-            
-            frame.Caption = "Expediente " & numberFiles
-            frame.Font.Bold = True
-            
-            fieldCount = .Fields.Count
-
-            list.Clear
-            list.ColumnCount = 2
-            list.ColumnWidths = "100;300"
-            
-            For i = 0 To fieldCount - 1
-                 list.AddItem
-                 list.list(i, 0) = UCase(Replace(.Fields(i).name, "_", " "))
-                 list.list(i, 1) = .Fields(i).Value
-            Next i
-            
+        If Not .EOF And Not .BOF Then
+            Select Case True
+                Case TypeName(structData) = "Dictionary"
+                    For i = 0 To .Fields.Count - 1
+                    
+                         k = LCase(.Fields(i).name)
+                         v = IIf(IsNull(.Fields(i).Value), "", .Fields(i).Value)
+                         
+                         structData.Add k, v
+                         
+                    Next i
+                Case TypeName(structData) = "Variant()"
+                    For i = LBound(structData, 1) To UBound(structData, 1)
+                        For j = LBound(structData, 2) To UBound(structData, 2)
+                        
+                            k = UCase(Replace(.Fields(i).name, "_", " "))
+                            v = IIf(IsNull(.Fields(i).Value), "", .Fields(i).Value)
+                            
+                            If j > 0 Then
+                                structData(i, j) = v
+                            Else
+                                structData(i, j) = k
+                            End If
+    
+                        Next j
+                    Next i
+            End Select
         End If
     End With
-    
-    Exit Sub
+    Exit Function
 Catch:
 
     Err.Raise Err.Number, Description:=Err.Description
     On Error GoTo 0
     
-End Sub
+End Function
 
